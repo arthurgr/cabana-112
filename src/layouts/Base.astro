@@ -1,0 +1,168 @@
+---
+const {
+  title,
+  description,
+  canonicalURL,
+  ogImage = '/og-cabana.jpg',
+  structuredData,
+} = Astro.props;
+
+const siteURL = 'https://cabana112abaco.com';
+const listingURL = 'https://theabacoclub.com/rentals/cabana-112/';
+const fullCanonical = canonicalURL ? `${siteURL}${canonicalURL}` : siteURL;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>{title} | Cabana 112 at The Abaco Club</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={fullCanonical} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={fullCanonical} />
+  <meta property="og:image" content={`${siteURL}${ogImage}`} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Structured data passed per-page -->
+  {structuredData && (
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  )}
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal: #3e848f;
+      --navy: #12496a;
+      --coral: #f48171;
+      --sand: #fffbf8;
+      --text: #382f2d;
+      --muted: #585858;
+      --border: #e0e0e0;
+      --max-w: 780px;
+    }
+
+    html { font-family: 'Georgia', serif; color: var(--text); background: var(--sand); }
+
+    body { min-height: 100vh; display: flex; flex-direction: column; }
+
+    a { color: var(--navy); }
+    a:hover { color: var(--teal); }
+
+    .site-header {
+      background: var(--navy);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .site-header .logo {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+    }
+
+    .site-header .logo span { color: var(--coral); }
+
+    .site-header nav { display: flex; gap: 1.5rem; }
+
+    .site-header nav a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .site-header nav a:hover { color: #fff; }
+
+    .cta-bar {
+      background: var(--coral);
+      text-align: center;
+      padding: 0.75rem 1rem;
+    }
+
+    .cta-bar a {
+      color: #fff;
+      text-decoration: none;
+      font-family: sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    .cta-bar a:hover { text-decoration: underline; color: #fff; }
+
+    main { flex: 1; }
+
+    .site-footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.7);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-family: sans-serif;
+      font-size: 0.82rem;
+      line-height: 1.8;
+    }
+
+    .site-footer a { color: rgba(255,255,255,0.7); }
+    .site-footer a:hover { color: #fff; }
+
+    .site-footer .footer-note {
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      opacity: 0.55;
+    }
+  </style>
+
+  <slot name="head" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo">Cabana <span>112</span> — Abaco, Bahamas</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/local-area/">Area Guide</a>
+      <a href="/blog/">Journal</a>
+    </nav>
+  </header>
+
+  <div class="cta-bar">
+    <a href={listingURL} target="_blank" rel="noopener">
+      Book Cabana 112 at The Abaco Club →
+    </a>
+  </div>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      Cabana 112 is a private rental at
+      <a href={listingURL} target="_blank" rel="noopener">The Abaco Club on Winding Bay</a>,
+      Marsh Harbour, Abaco, The Bahamas.
+    </p>
+    <p class="footer-note">
+      This site is an owner-managed resource. All bookings are handled exclusively
+      through The Abaco Club's official reservation system.
+    </p>
+  </footer>
+</body>
+</html>
