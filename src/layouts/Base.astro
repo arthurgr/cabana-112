@@ -10,6 +10,12 @@ const {
 const siteURL = 'https://cabana112abaco.com';
 const listingURL = 'https://theabacoclub.com/rentals/cabana-112/';
 const fullCanonical = canonicalURL ? `${siteURL}${canonicalURL}` : siteURL;
+
+const inquiryEmail =
+  import.meta.env.PUBLIC_INQUIRY_EMAIL?.trim() || 'your-email@example.com';
+const inquiryMailto = `mailto:${inquiryEmail}?subject=${encodeURIComponent(
+  'Cabana 112 — availability inquiry'
+)}`;
 ---
 
 <!DOCTYPE html>
@@ -110,10 +116,43 @@ const fullCanonical = canonicalURL ? `${siteURL}${canonicalURL}` : siteURL;
     .site-footer a { color: rgba(255,255,255,0.7); }
     .site-footer a:hover { color: #fff; }
 
-    .site-footer .footer-note {
-      margin-top: 0.75rem;
-      font-size: 0.75rem;
-      opacity: 0.55;
+    .footer-cta {
+      max-width: var(--max-w);
+      margin: 0 auto 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .footer-cta h2 {
+      font-family: Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
+      text-align: center;
+    }
+
+    .footer-cta p {
+      color: rgba(255, 255, 255, 0.78);
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    .footer-cta a {
+      display: inline-block;
+      background: var(--coral);
+      color: #fff !important;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-cta a:hover {
+      background: #e0705f;
+      color: #fff !important;
     }
   </style>
 
@@ -125,9 +164,7 @@ const fullCanonical = canonicalURL ? `${siteURL}${canonicalURL}` : siteURL;
   </header>
 
   <div class="cta-bar">
-    <a href={listingURL} target="_blank" rel="noopener">
-      Book Cabana 112 at The Abaco Club →
-    </a>
+    <a href={inquiryMailto}>Email to Inquire and Book →</a>
   </div>
 
   <main>
@@ -135,14 +172,15 @@ const fullCanonical = canonicalURL ? `${siteURL}${canonicalURL}` : siteURL;
   </main>
 
   <footer class="site-footer">
+    <div class="footer-cta">
+      <h2>Check Availability</h2>
+      <p>Ready to experience Cabana 112?</p>
+      <a href={inquiryMailto}>Email to Inquire &amp; Book</a>
+    </div>
     <p>
       Cabana 112 is a private rental at
       <a href={listingURL} target="_blank" rel="noopener">The Abaco Club on Winding Bay</a>,
       Marsh Harbour, Abaco, The Bahamas.
-    </p>
-    <p class="footer-note">
-      This site is an owner-managed resource. All bookings are handled exclusively
-      through The Abaco Club's official reservation system.
     </p>
   </footer>
 </body>
