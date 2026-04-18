@@ -65,7 +65,6 @@ const fullCanonical = canonicalURL ? `${siteURL}${canonicalURL}` : siteURL;
       padding: 1rem 1.5rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
       flex-wrap: wrap;
       gap: 0.75rem;
     }
@@ -78,19 +77,6 @@ const fullCanonical = canonicalURL ? `${siteURL}${canonicalURL}` : siteURL;
     }
 
     .site-header .logo span { color: var(--coral); }
-
-    .site-header nav { display: flex; gap: 1.5rem; }
-
-    .site-header nav a {
-      color: rgba(255,255,255,0.85);
-      text-decoration: none;
-      font-family: sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .site-header nav a:hover { color: #fff; }
 
     .cta-bar {
       background: var(--coral);
@@ -136,11 +122,6 @@ const fullCanonical = canonicalURL ? `${siteURL}${canonicalURL}` : siteURL;
 <body>
   <header class="site-header">
     <a href="/" class="logo">Cabana <span>112</span> — Abaco, Bahamas</a>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/local-area/">Area Guide</a>
-      <a href="/blog/">Journal</a>
-    </nav>
   </header>
 
   <div class="cta-bar">
